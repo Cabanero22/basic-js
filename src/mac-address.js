@@ -18,10 +18,10 @@ function isMAC48Address(n) {
   const array = n.split('-');
     let result = true;
     for (let i = 0; i < array.length; i++) {
-    const check = parseInt(array[i], 16);
-    if (isNaN(check) === true) return result = false
-    }
-return result;
+      const check = parseInt(array[i], 16);
+      if (isNaN(check) === true) return result = false
+      }
+  return result;
 }
 module.exports = {
   isMAC48Address
