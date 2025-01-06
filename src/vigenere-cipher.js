@@ -25,51 +25,51 @@ class VigenereCipheringMachine {
     this.direct = direct;
   }
 
-  encrypt(message, key) {
-    if (!message || !key) {
+  encrypt(text, key) {
+    if (!text || !key) {
       throw new Error('Incorrect arguments!');
     }
 
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    message = message.toUpperCase();
+    text = text.toUpperCase();
     key = key.toUpperCase();
-    let encryptedMessage = '';
+    let encryptedText = '';
     let keyIndex = 0;
 
-    for (let i = 0; i < message.length; i++) {
-      const messageChar = message[i];
-      if (alphabet.includes(messageChar)) {
+    for (let i = 0; i < text.length; i++) {
+      const textChar = text[i];
+      if (alphabet.includes(textChar)) {
         const keyChar = key[keyIndex % key.length];
-        const encryptedChar = alphabet[(alphabet.indexOf(messageChar) + alphabet.indexOf(keyChar)) % 26];
-        encryptedMessage += encryptedChar;
+        const encryptedChar = alphabet[(alphabet.indexOf(textChar) + alphabet.indexOf(keyChar)) % 26];
+        encryptedText += encryptedChar;
         keyIndex++;
       } else {
-        encryptedMessage += messageChar;
+        encryptedText += textChar;
       }
     }
-    return this.direct ? encryptedMessage : encryptedMessage.split('').reverse().join('');
+    return this.direct ? encryptedText : encryptedText.split('').reverse().join('');
   }
-  decrypt(encryptedMessage, key) {
-    if (!encryptedMessage || !key) {
+  decrypt(text, key) {
+    if (!text || !key) {
       throw new Error('Incorrect arguments!');
     }
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    encryptedMessage = encryptedMessage.toUpperCase();
+    text = text.toUpperCase();
     key = key.toUpperCase();
-    let decryptedMessage = '';
+    let decryptedText = '';
     let keyIndex = 0;
-    for (let i = 0; i < encryptedMessage.length; i++) {
-      const encryptedChar = encryptedMessage[i];
+    for (let i = 0; i < text.length; i++) {
+      const encryptedChar = text[i];
       if (alphabet.includes(encryptedChar)) {
         const keyChar = key[keyIndex % key.length];
         const decryptedChar = alphabet[(alphabet.indexOf(encryptedChar) - alphabet.indexOf(keyChar) + 26) % 26];
-        decryptedMessage += decryptedChar;
+        decryptedText += decryptedChar;
         keyIndex++;
       } else {
-        decryptedMessage += encryptedChar;
+        decryptedText += encryptedChar;
       }
     }
-    return this.direct ? decryptedMessage : decryptedMessage.split('').reverse().join('');
+    return this.direct ? decryptedText : decryptedText.split('').reverse().join('');
   }
 }
 
